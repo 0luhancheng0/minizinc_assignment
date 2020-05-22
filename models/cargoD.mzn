@@ -29,6 +29,61 @@ array[CARGO] of var TIME: load;
 array[CARGO] of var TIME: finish;
 array[CARGO] of var LOADER: which;
 
+include "globals.mzn";
+
+% represent the total time span for any cargo to be loaded
+array[CARGO] of TIME: total_load_time = [load_time * size[c] | c in CARGO];
+
+
+% set the value for eastx, endbuild and finish
+constraint forall(c in CARGO)(
+    eastx[c] = westx[c] + size[c] 
+    /\ endbuild[c] = build[c] + build_time * size[c] 
+    /\ finish[c] = load[c] + total_load_time[c]
+);
+
+% make sure the loading start after the entire cargo is built
+constraint forall(c in CARGO)(
+    load[c] >= build[c] + size[c] * build_time
+);
+
+% make sure cargo does not overlap in space-time on the pad
+constraint diffn(
+    westx, 
+    build,
+    size,
+    [finish[c] - build[c] | c in CARGO]
+);
+
+% part B, make sure any loader can only load one cargo at a time
+constraint forall(l in LOADER)(
+    disjunctive(
+        [load[c] | c in CARGO],   
+        [total_load_time[c] * (which[c] = l) | c in CARGO]
+    )
+);
+% array[int] of var CARGO: cargo_sort_idx = [to_enum(CARGO, i) | i in arg_sort(load)];
+% constraint forall(i in 1..length(cargo_sort_idx)-1)(
+%     load[cargo_sort_idx[i+1]] - finish[cargo_sort_idx[i]] >= abs(westx[cargo_sort_idx[i+1]] - eastx[cargo_sort_idx[i]]) * load_speed
+% );
+
+% part D, make sure there is sufficient time intervel for loader to move between loading event 
+array[int] of var int: cargo_sort_idx = arg_sort(load);
+constraint forall(i in 1..length(cargo_sort_idx)-1)(
+    load[to_enum(CARGO, cargo_sort_idx[i+1])] - finish[to_enum(CARGO, cargo_sort_idx[i])] >= abs(westx[to_enum(CARGO, cargo_sort_idx[i+1])] - eastx[to_enum(CARGO, cargo_sort_idx[i])]) * load_speed
+);
+% make sure loading start after designated ship's arrival
+constraint forall(c in CARGO)(
+    load[c] >= arrival[ship[c]]
+);
+% part C, make sure there is only one cargo loading for any ship
+constraint forall(s in SHIP)(
+    disjunctive(
+        [load[c] | c in CARGO],
+        [total_load_time[c] * (ship[c] = s) | c in CARGO]
+    )
+);
+
 output 
 ["westx  = array1d(CARGO,\(westx));\n"] ++
 ["eastx  = array1d(CARGO,\(eastx));\n"] ++

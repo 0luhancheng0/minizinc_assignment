@@ -29,6 +29,25 @@ array[CARGO] of var TIME: load;
 array[CARGO] of var TIME: finish;
 array[CARGO] of var LOADER: which;
 
+include "globals.mzn";
+constraint forall(c in CARGO)(
+    eastx[c] = westx[c] + size[c] 
+    /\ endbuild[c] = build[c] + build_time * size[c] 
+    /\ finish[c] = load[c] + load_time * size[c]
+);
+constraint forall(c in CARGO)(
+    load[c] >= build[c] + size[c] * build_time
+);
+constraint diffn(
+    westx, 
+    build,
+    size,
+    [finish[c] - build[c] | c in CARGO]
+);
+
+constraint all_equal(which);
+constraint which[to_enum(CARGO, 1)] = 1;
+
 output 
 ["westx  = array1d(CARGO,\(westx));\n"] ++
 ["eastx  = array1d(CARGO,\(eastx));\n"] ++
