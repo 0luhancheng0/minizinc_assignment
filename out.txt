@@ -1,0 +1,162 @@
+*********************************************************************************************
+Checking against data/c0.dzn
+NL = 2;
+CARGO = anon_enum(7);
+size = array1d(CARGO,[4, 8, 2, 5, 4, 3, 3]);
+makespan = 200;
+SHIP = {SH_1,SH_2,SH_3,SH_4};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_1,SH_4,SH_2,SH_3]);
+arrival = array1d(SHIP,[0, 0, 20, 40]);
+len = 12;
+build_time = 4;
+load_time = 3;
+load_speed = 1;
+partF = true;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c1.dzn
+NL = 1;
+CARGO = anon_enum(4);
+size = array1d(CARGO,[2, 1, 2, 3]);
+makespan = 50;
+SHIP = {SH_1,SH_2,SH_3,SH_4};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_4]);
+arrival = array1d(SHIP,[0, 10, 20, 30]);
+len = 3;
+build_time = 2;
+load_time = 1;
+load_speed = 1;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c2.dzn
+NL = 1;
+CARGO = anon_enum(4);
+size = array1d(CARGO,[4, 8, 2, 5]);
+makespan = 70;
+SHIP = {SH_1,SH_2,SH_3,SH_4};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_4]);
+arrival = array1d(SHIP,[0, 10, 40, 30]);
+len = 12;
+build_time = 3;
+load_time = 1;
+load_speed = 1;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c3.dzn
+NL = 1;
+CARGO = anon_enum(7);
+size = array1d(CARGO,[4, 8, 2, 5, 4, 3, 3]);
+makespan = 100;
+SHIP = {SH_1,SH_2,SH_3,SH_4,SH_5,SH_6,SH_7};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_5,SH_4,SH_7,SH_6]);
+arrival = array1d(SHIP,[0, 0, 20, 40, 80, 20, 30]);
+len = 12;
+build_time = 4;
+load_time = 2;
+load_speed = 1;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c4.dzn
+NL = 1;
+CARGO = anon_enum(8);
+size = array1d(CARGO,[2, 1, 2, 3, 1, 3, 2, 1]);
+makespan = 100;
+SHIP = {SH_1,SH_2,SH_3,SH_4};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_4,SH_1,SH_3,SH_2,SH_3]);
+arrival = array1d(SHIP,[0, 10, 60, 30]);
+len = 3;
+build_time = 2;
+load_time = 1;
+load_speed = 1;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c5.dzn
+NL = 3;
+CARGO = anon_enum(8);
+size = array1d(CARGO,[4, 3, 2, 5, 4, 2, 1, 4]);
+makespan = 60;
+SHIP = {SH_1,SH_2,SH_3,SH_4};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_4,SH_4,SH_3,SH_1,SH_2]);
+arrival = array1d(SHIP,[0, 10, 0, 30]);
+len = 12;
+build_time = 2;
+load_time = 1;
+load_speed = 1;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c6.dzn
+NL = 3;
+CARGO = anon_enum(12);
+size = array1d(CARGO,[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+makespan = 100;
+SHIP = {SH_1,SH_2,SH_3,SH_4,SH_5,SH_6,SH_7,SH_8,SH_9,SH_10,SH_11,SH_12};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_4,SH_5,SH_6,SH_7,SH_8,SH_9,SH_10,SH_11,SH_12]);
+arrival = array1d(SHIP,[0, 0, 20, 40, 50, 20, 30, 0, 15, 20, 25, 30]);
+len = 3;
+build_time = 4;
+load_time = 2;
+load_speed = 1;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c7.dzn
+NL = 4;
+CARGO = anon_enum(12);
+size = array1d(CARGO,[2, 2, 1, 4, 3, 2, 5, 1, 2, 3, 5, 4]);
+makespan = 300;
+SHIP = {SH_1,SH_2,SH_3,SH_4,SH_5,SH_6,SH_7,SH_8,SH_9,SH_10,SH_11,SH_12};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_4,SH_5,SH_6,SH_7,SH_8,SH_9,SH_10,SH_11,SH_12]);
+arrival = array1d(SHIP,[0, 100, 20, 40, 150, 20, 30, 0, 15, 120, 250, 30]);
+len = 20;
+build_time = 4;
+load_time = 3;
+load_speed = 1;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c8.dzn
+NL = 4;
+CARGO = anon_enum(12);
+size = array1d(CARGO,[2, 2, 1, 4, 3, 2, 5, 1, 2, 3, 5, 4]);
+makespan = 300;
+SHIP = {SH_1,SH_2,SH_3,SH_4,SH_5,SH_6};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_4,SH_5,SH_6,SH_1,SH_2,SH_3,SH_4,SH_5,SH_6]);
+arrival = array1d(SHIP,[0, 100, 20, 40, 150, 20]);
+len = 20;
+build_time = 4;
+load_time = 3;
+load_speed = 1;
+partF = true;
+*********************************************************************************************
+
+
+*********************************************************************************************
+Checking against data/c9.dzn
+NL = 8;
+CARGO = anon_enum(24);
+size = array1d(CARGO,[2, 2, 1, 4, 3, 2, 5, 1, 2, 3, 5, 4, 2, 2, 1, 4, 3, 2, 5, 1, 2, 3, 5, 4]);
+makespan = 300;
+SHIP = {SH_1,SH_2,SH_3,SH_4,SH_5,SH_6,SH_7,SH_8,SH_9,SH_10,SH_11,SH_12,SH_13,SH_14,SH_15,SH_16,SH_17,SH_18,SH_19,SH_20,SH_21,SH_22,SH_23,SH_24};
+ship = array1d(CARGO,[SH_1,SH_2,SH_3,SH_4,SH_5,SH_6,SH_7,SH_8,SH_9,SH_10,SH_11,SH_12,SH_13,SH_14,SH_15,SH_16,SH_17,SH_18,SH_19,SH_20,SH_21,SH_22,SH_23,SH_24]);
+arrival = array1d(SHIP,[0, 10, 20, 40, 150, 20, 30, 0, 15, 120, 25, 30, 0, 10, 20, 40, 150, 20, 30, 0, 15, 120, 25, 30]);
+len = 20;
+build_time = 4;
+load_time = 3;
+load_speed = 1;
+*********************************************************************************************
+
+

@@ -62,15 +62,17 @@ constraint forall(l in LOADER)(
         [total_load_time[c] * (which[c] = l) | c in CARGO]
     )
 );
-% array[int] of var CARGO: cargo_sort_idx = [to_enum(CARGO, i) | i in arg_sort(load)];
-% constraint forall(i in 1..length(cargo_sort_idx)-1)(
-%     load[cargo_sort_idx[i+1]] - finish[cargo_sort_idx[i]] >= abs(westx[cargo_sort_idx[i+1]] - eastx[cargo_sort_idx[i]]) * load_speed
-% );
 
 % part D, make sure there is sufficient time intervel for loader to move between loading event 
-array[int] of var int: cargo_sort_idx = arg_sort(load);
-constraint forall(i in 1..length(cargo_sort_idx)-1)(
-    load[to_enum(CARGO, cargo_sort_idx[i+1])] - finish[to_enum(CARGO, cargo_sort_idx[i])] >= abs(westx[to_enum(CARGO, cargo_sort_idx[i+1])] - eastx[to_enum(CARGO, cargo_sort_idx[i])]) * load_speed
+array[1..card(CARGO)] of var CARGO: cargo_load_order;
+constraint forall(i in 1..card(CARGO))(
+    let {
+        array[int] of var int: order = arg_sort(load);
+    } in
+    cargo_load_order[i] = to_enum(CARGO, order[i])
+);
+constraint forall(i in 1..length(cargo_load_order)-1)(
+    load[cargo_load_order[i+1]] - finish[cargo_load_order[i]] >= abs(westx[cargo_load_order[i+1]] - eastx[cargo_load_order[i]]) * load_speed
 );
 % make sure loading start after designated ship's arrival
 constraint forall(c in CARGO)(
@@ -84,6 +86,13 @@ constraint forall(s in SHIP)(
     )
 );
 
+var int: objective = 
+    sum(s in SHIP)(
+        max(c in CARGO where ship[c] = s)(finish[c]) - arrival[s]
+    );
+
+solve minimize objective;
+
 output 
 ["westx  = array1d(CARGO,\(westx));\n"] ++
 ["eastx  = array1d(CARGO,\(eastx));\n"] ++
@@ -92,7 +101,8 @@ output
 ["load  = array1d(CARGO,\(load));\n"] ++
 ["finish  = array1d(CARGO,\(finish));\n"] ++
 ["which  = array1d(CARGO,\(which));\n"] 
+% ++ ["objective = \(objective);\n"]
 ;
 
 % include "../viz/cargo_viz.mzn";
-% output [cargo_viz(westx,eastx,build,endbuild,load,finish,which)];
+% output [cargo_viz(westx,eastx,build,endbuild,load,finish,which,objective)];
