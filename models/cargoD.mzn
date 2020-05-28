@@ -86,12 +86,6 @@ constraint forall(s in SHIP)(
     )
 );
 
-var int: objective = 
-    sum(s in SHIP)(
-        max(c in CARGO where ship[c] = s)(finish[c]) - arrival[s]
-    );
-
-solve minimize objective;
 
 output 
 ["westx  = array1d(CARGO,\(westx));\n"] ++
@@ -101,8 +95,7 @@ output
 ["load  = array1d(CARGO,\(load));\n"] ++
 ["finish  = array1d(CARGO,\(finish));\n"] ++
 ["which  = array1d(CARGO,\(which));\n"] 
-% ++ ["objective = \(objective);\n"]
 ;
 
 % include "../viz/cargo_viz.mzn";
-% output [cargo_viz(westx,eastx,build,endbuild,load,finish,which,objective)];
+% output [cargo_viz(westx,eastx,build,endbuild,load,finish,which)];
